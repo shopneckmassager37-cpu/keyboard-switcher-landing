@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
  * - Typography: Poppins for headings, Inter for body
  * - Interactions: Smooth transitions, parallax effects, hover animations
  * - Visual Style: Glassmorphic cards, subtle depth, professional aesthetic
+ * - Language: Hebrew (RTL)
  */
 
 type OS = 'windows' | 'mac' | 'linux' | 'unknown';
@@ -32,29 +33,29 @@ export default function Home() {
 
   const getDownloadLink = () => {
     const baseUrl = 'https://github.com/shopneckmassager37-cpu/keyboard-lang-switcher-windows/releases/download/v1.0.0';
-    if (os === 'windows') return `${baseUrl}/keyboard_switcher.ahk`;
-    return baseUrl; // For other OS, link to releases page
+    if (os === 'windows') return `${baseUrl}/KeyboardSwitcherSetup.exe`;
+    return 'https://github.com/shopneckmassager37-cpu/keyboard-lang-switcher-windows/releases';
   };
 
   const getDownloadText = () => {
-    if (os === 'windows') return 'Download for Windows';
-    if (os === 'mac') return 'Coming Soon for Mac';
-    if (os === 'linux') return 'Coming Soon for Linux';
-    return 'Download Now';
+    if (os === 'windows') return 'הורד עבור Windows';
+    if (os === 'mac') return 'בקרוב עבור Mac';
+    if (os === 'linux') return 'בקרוב עבור Linux';
+    return 'הורד עכשיו';
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100" dir="rtl">
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/50 shadow-sm">
         <div className="container flex items-center justify-between h-16">
-          <div className="flex items-center gap-2">
-            <Keyboard className="w-6 h-6 text-indigo-700" />
-            <span className="font-bold text-lg text-indigo-900">KeyboardSwitcher</span>
-          </div>
           <a href="https://github.com/shopneckmassager37-cpu/keyboard-lang-switcher-windows" target="_blank" rel="noopener noreferrer" className="text-sm text-slate-600 hover:text-indigo-700 transition-colors">
             GitHub
           </a>
+          <div className="flex items-center gap-2">
+            <Keyboard className="w-6 h-6 text-indigo-700" />
+            <span className="font-bold text-lg text-indigo-900">מחליף שפות מקלדת</span>
+          </div>
         </div>
       </nav>
 
@@ -75,16 +76,16 @@ export default function Home() {
 
           <div className="container grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
-            <div className="space-y-8 animate-fade-in">
+            <div className="space-y-8 animate-fade-in lg:order-2">
               <div className="space-y-4">
                 <h1 className="text-5xl lg:text-6xl font-bold text-indigo-900 leading-tight">
-                  Switch Languages
+                  החלף שפות
                   <span className="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-cyan-500">
-                    Instantly
+                    בשנייה
                   </span>
                 </h1>
                 <p className="text-xl text-slate-600 max-w-lg leading-relaxed">
-                  A powerful Windows background application that automatically switches your keyboard language and removes CapsLock with a single hotkey: <span className="font-semibold text-indigo-700">ALT+SHIFT+J</span>
+                  אפליקציית Windows חזקה שמחליפה את שפת המקלדת שלך באופן אוטומטי ומסירה CapsLock בלחיצה אחת: <span className="font-semibold text-indigo-700">ALT+SHIFT+J</span>
                 </p>
               </div>
 
@@ -95,7 +96,7 @@ export default function Home() {
                   onClick={() => window.open(getDownloadLink(), '_blank')}
                   disabled={os !== 'windows'}
                 >
-                  <Download className="w-5 h-5 mr-2" />
+                  <Download className="w-5 h-5 ml-2" />
                   {getDownloadText()}
                 </Button>
                 <Button
@@ -104,25 +105,25 @@ export default function Home() {
                   className="border-2 border-indigo-200 text-indigo-700 hover:bg-indigo-50 transition-all duration-300"
                   onClick={() => document.getElementById('install-guide')?.scrollIntoView({ behavior: 'smooth' })}
                 >
-                  Learn More
+                  למידע נוסף
                 </Button>
               </div>
 
               {/* OS Detection Info */}
               <div className="text-sm text-slate-500">
-                {os === 'windows' && <p>✓ Windows detected - Ready to download</p>}
-                {os === 'mac' && <p>Mac OS detected - Support coming soon</p>}
-                {os === 'linux' && <p>Linux detected - Support coming soon</p>}
-                {os === 'unknown' && <p>Unable to detect OS - Download available for Windows</p>}
+                {os === 'windows' && <p>✓ Windows זוהה - מוכן להורדה</p>}
+                {os === 'mac' && <p>Mac OS זוהה - תמיכה בקרוב</p>}
+                {os === 'linux' && <p>Linux זוהה - תמיכה בקרוב</p>}
+                {os === 'unknown' && <p>לא הצלחנו לזהות את מערכת ההפעלה - הורדה זמינה עבור Windows</p>}
               </div>
             </div>
 
             {/* Right Illustration */}
-            <div className="hidden lg:flex justify-center items-center">
+            <div className="hidden lg:flex justify-center items-center lg:order-1">
               <div className="relative w-full h-96">
                 <img
                   src="https://d2xsxph8kpxj0f.cloudfront.net/310519663601682708/LbAZvJQ2py3oVB9QVnJsnF/keyboard-icon-illustration-nmvxjq6xtQd9Vm48NZaGJX.webp"
-                  alt="Keyboard Language Switching"
+                  alt="החלפת שפות מקלדת"
                   className="w-full h-full object-contain drop-shadow-2xl"
                 />
               </div>
@@ -134,9 +135,9 @@ export default function Home() {
         <section className="py-20 bg-white/50 backdrop-blur-sm">
           <div className="container">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-indigo-900 mb-4">Powerful Features</h2>
+              <h2 className="text-4xl font-bold text-indigo-900 mb-4">תכונות חזקות</h2>
               <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                Designed to make your multilingual typing experience seamless and efficient
+                מעוצב כדי להפוך את חוויית הקלדה רב-לשונית שלך לחלקה ויעילה
               </p>
             </div>
 
@@ -148,9 +149,9 @@ export default function Home() {
                   <div className="w-14 h-14 bg-gradient-to-br from-indigo-600 to-indigo-700 rounded-xl flex items-center justify-center mb-4 group-hover:shadow-lg transition-shadow">
                     <Zap className="w-7 h-7 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-indigo-900 mb-3">One-Click Switching</h3>
+                  <h3 className="text-xl font-bold text-indigo-900 mb-3">החלפה בלחיצה אחת</h3>
                   <p className="text-slate-600 leading-relaxed">
-                    Press <span className="font-semibold text-indigo-700">ALT+SHIFT+J</span> to instantly switch between English and Hebrew keyboard layouts
+                    לחץ על <span className="font-semibold text-indigo-700">ALT+SHIFT+J</span> כדי להחליף מיידית בין פריסות מקלדת אנגלית לעברית
                   </p>
                 </div>
               </div>
@@ -162,9 +163,9 @@ export default function Home() {
                   <div className="w-14 h-14 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-xl flex items-center justify-center mb-4 group-hover:shadow-lg transition-shadow">
                     <Check className="w-7 h-7 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-indigo-900 mb-3">Auto Language Switch</h3>
+                  <h3 className="text-xl font-bold text-indigo-900 mb-3">החלפה אוטומטית של שפה</h3>
                   <p className="text-slate-600 leading-relaxed">
-                    Automatically detects and switches your keyboard language to match your typing needs
+                    מזהה ומחליף באופן אוטומטי את שפת המקלדת שלך כדי להתאים לצרכי ההקלדה שלך
                   </p>
                 </div>
               </div>
@@ -176,9 +177,9 @@ export default function Home() {
                   <div className="w-14 h-14 bg-gradient-to-br from-indigo-600 to-cyan-500 rounded-xl flex items-center justify-center mb-4 group-hover:shadow-lg transition-shadow">
                     <Keyboard className="w-7 h-7 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-indigo-900 mb-3">CapsLock Removal</h3>
+                  <h3 className="text-xl font-bold text-indigo-900 mb-3">הסרת CapsLock</h3>
                   <p className="text-slate-600 leading-relaxed">
-                    Automatically removes CapsLock state when switching languages for cleaner typing
+                    מסירה באופן אוטומטי את מצב CapsLock בעת החלפת שפות להקלדה נקייה יותר
                   </p>
                 </div>
               </div>
@@ -190,9 +191,9 @@ export default function Home() {
         <section id="install-guide" className="py-20 bg-gradient-to-b from-slate-50 to-white">
           <div className="container">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-indigo-900 mb-4">Installation Guide</h2>
+              <h2 className="text-4xl font-bold text-indigo-900 mb-4">הוראות התקנה</h2>
               <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                Get started in just 3 simple steps
+                התחל בשלושה שלבים פשוטים
               </p>
             </div>
 
@@ -203,13 +204,13 @@ export default function Home() {
                   <div className="w-16 h-16 bg-gradient-to-br from-indigo-600 to-indigo-700 rounded-full flex items-center justify-center text-white text-2xl font-bold mb-4 shadow-lg">
                     1
                   </div>
-                  <h3 className="text-xl font-bold text-indigo-900 mb-2">Download</h3>
+                  <h3 className="text-xl font-bold text-indigo-900 mb-2">הורדה</h3>
                   <p className="text-slate-600">
-                    Click the "Download Now" button above to get the installer
+                    לחץ על כפתור "הורד עכשיו" למעלה כדי להוריד את ההתקנה
                   </p>
                 </div>
                 {/* Connector line */}
-                <div className="hidden md:block absolute top-8 left-[calc(50%+2rem)] w-[calc(100%-4rem)] h-1 bg-gradient-to-r from-indigo-300 to-transparent" />
+                <div className="hidden md:block absolute top-8 right-[calc(50%+2rem)] w-[calc(100%-4rem)] h-1 bg-gradient-to-l from-indigo-300 to-transparent" />
               </div>
 
               {/* Step 2 */}
@@ -218,13 +219,13 @@ export default function Home() {
                   <div className="w-16 h-16 bg-gradient-to-br from-indigo-600 to-indigo-700 rounded-full flex items-center justify-center text-white text-2xl font-bold mb-4 shadow-lg">
                     2
                   </div>
-                  <h3 className="text-xl font-bold text-indigo-900 mb-2">Install</h3>
+                  <h3 className="text-xl font-bold text-indigo-900 mb-2">התקנה</h3>
                   <p className="text-slate-600">
-                    Run the installer and follow the setup wizard
+                    הרץ את ההתקנה ועקוב אחרי אשף ההתקנה
                   </p>
                 </div>
                 {/* Connector line */}
-                <div className="hidden md:block absolute top-8 left-[calc(50%+2rem)] w-[calc(100%-4rem)] h-1 bg-gradient-to-r from-indigo-300 to-transparent" />
+                <div className="hidden md:block absolute top-8 right-[calc(50%+2rem)] w-[calc(100%-4rem)] h-1 bg-gradient-to-l from-indigo-300 to-transparent" />
               </div>
 
               {/* Step 3 */}
@@ -233,9 +234,9 @@ export default function Home() {
                   <div className="w-16 h-16 bg-gradient-to-br from-indigo-600 to-indigo-700 rounded-full flex items-center justify-center text-white text-2xl font-bold mb-4 shadow-lg">
                     3
                   </div>
-                  <h3 className="text-xl font-bold text-indigo-900 mb-2">Start Using</h3>
+                  <h3 className="text-xl font-bold text-indigo-900 mb-2">התחל להשתמש</h3>
                   <p className="text-slate-600">
-                    Press <span className="font-semibold">ALT+SHIFT+J</span> to switch languages
+                    לחץ על <span className="font-semibold">ALT+SHIFT+J</span> כדי להחליף שפות
                   </p>
                 </div>
               </div>
@@ -250,9 +251,9 @@ export default function Home() {
             <div className="absolute bottom-10 right-10 w-72 h-72 bg-cyan-300 rounded-full mix-blend-multiply filter blur-3xl" />
           </div>
           <div className="container relative z-10 text-center">
-            <h2 className="text-4xl font-bold mb-4">Ready to Switch?</h2>
+            <h2 className="text-4xl font-bold mb-4">מוכן להחליף?</h2>
             <p className="text-lg text-indigo-100 mb-8 max-w-2xl mx-auto">
-              Join thousands of multilingual users who are already using KeyboardSwitcher to boost their productivity
+              הצטרף לאלפי משתמשים רב-לשוניים שכבר משתמשים ב-KeyboardSwitcher כדי להגביר את הפרודוקטיביות שלהם
             </p>
             <Button
               size="lg"
@@ -260,7 +261,7 @@ export default function Home() {
               onClick={() => window.open(getDownloadLink(), '_blank')}
               disabled={os !== 'windows'}
             >
-              <Download className="w-5 h-5 mr-2" />
+              <Download className="w-5 h-5 ml-2" />
               {getDownloadText()}
             </Button>
           </div>
@@ -272,11 +273,11 @@ export default function Home() {
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <div>
-              <h3 className="font-bold text-white mb-4">KeyboardSwitcher</h3>
-              <p className="text-sm">A powerful tool for multilingual users</p>
+              <h3 className="font-bold text-white mb-4">מחליף שפות מקלדת</h3>
+              <p className="text-sm">כלי חזק למשתמשים רב-לשוניים</p>
             </div>
             <div>
-              <h3 className="font-bold text-white mb-4">Links</h3>
+              <h3 className="font-bold text-white mb-4">קישורים</h3>
               <ul className="text-sm space-y-2">
                 <li>
                   <a href="https://github.com/shopneckmassager37-cpu/keyboard-lang-switcher-windows" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
@@ -291,12 +292,12 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h3 className="font-bold text-white mb-4">Version</h3>
+              <h3 className="font-bold text-white mb-4">גרסה</h3>
               <p className="text-sm">v1.0.0</p>
             </div>
           </div>
           <div className="border-t border-slate-700 pt-8 text-center text-sm">
-            <p>© 2026 KeyboardSwitcher. Built with care for multilingual users.</p>
+            <p>© 2026 KeyboardSwitcher. בנוי בעבור משתמשים רב-לשוניים.</p>
           </div>
         </div>
       </footer>
